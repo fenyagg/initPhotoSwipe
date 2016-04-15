@@ -18,125 +18,146 @@
 	<!-- initPhotoSwipe -->
 	<script type="text/javascript" src="js/initPhotoSwipe.js"></script>
 	
-	<style>
+	<style>		
+		html {
+		    height: 100%;
+		}
+		body {
+			min-width: 480px;
+			background-color: #FBFBFB;
+			margin: 0;
+			height: 100%;
+		}
+		.container {
+			width: 980px;
+			max-width: 100%;
+			margin: auto;
+			padding: 80px 20px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			background-color: #fff;
+			height: 100%;
+		}
 		img{
 			max-width: 100%;
 		}
 	</style>
 </head>
 <body>
-	<p><br><br></p>
-	<!-- Slider main container -->
-	<div class="swiper-container swiper">
-	    <!-- Additional required wrapper -->
-	    <div class="swiper-wrapper">
-	        <!-- Slides -->
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
-	    </div>
-	    <!-- If we need pagination -->
-	    <div class="swiper-pagination"></div>
-	    
-	    <!-- If we need navigation buttons -->
-	    <div class="swiper-button-prev"></div>
-	    <div class="swiper-button-next"></div>
-	    
-	    <!-- If we need scrollbar -->
-	    <div class="swiper-scrollbar"></div>
-	</div><!-- .swiper-container -->
-	<script>
-		$(function() {		
-		    var swiper = new Swiper ('.swiper.swiper-container', {
-				// Optional parameters			
-				autoplay: false,
-				freeMode: false,
-				slidesPerView: 3, 
-				spaceBetween: 15,	
-		
-				// If we need pagination
-				pagination: '.swiper-pagination',
-		
-				// Navigation arrows
-				nextButton: '.swiper .swiper-button-next',
-				prevButton: '.swiper .swiper-button-prev',
-		
-				// And if we need scrollbar
-				scrollbar: '.swiper .swiper-scrollbar',
-		    });
+	<div class="container">
+		<h1>InitPhotoSwipe</h1>		
+		<!-- Slider main container -->
+		<div class="swiper-container swiper">
+		    <!-- Additional required wrapper -->
+		    <div class="swiper-wrapper">
+		        <!-- Slides -->
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe" href="http://placehold.it/462x198"><img src="http://placehold.it/350x150"></a></div>
+		    </div>
+		    <!-- If we need pagination -->
+		    <div class="swiper-pagination"></div>
+		    
+		    <!-- If we need navigation buttons -->
+		    <div class="swiper-button-prev"></div>
+		    <div class="swiper-button-next"></div>
+		    
+		    <!-- If we need scrollbar -->
+		    <div class="swiper-scrollbar"></div>
+		</div><!-- .swiper-container -->
+		<script>
+			$(function() {		
+			    var swiper = new Swiper ('.swiper.swiper-container', {
+					// Optional parameters			
+					autoplay: false,
+					freeMode: false,
+					slidesPerView: 3, 
+					spaceBetween: 15,	
+			
+					// If we need pagination
+					pagination: '.swiper-pagination',
+			
+					// Navigation arrows
+					nextButton: '.swiper .swiper-button-next',
+					prevButton: '.swiper .swiper-button-prev',
+			
+					// And if we need scrollbar
+					scrollbar: '.swiper .swiper-scrollbar',
+			    });
 
-		    $("a.photoswipe").initPhotoSwipe({
-				'events': {
-					'afterChange': function(){
-						var index = this.getCurrentIndex();
-						//листаем примерно до середины
-						var SwiperMiddle = +Math.floor(swiper.params.slidesPerView/2);								
-						if(index > 0 && index>=SwiperMiddle && SwiperMiddle >= 1) index = index-SwiperMiddle;
-						swiper.slideTo(index);
+			    $("a.photoswipe").initPhotoSwipe({
+					'events': {
+						'afterChange': function(){
+							var index = this.getCurrentIndex();
+							//листаем примерно до середины
+							var SwiperMiddle = +Math.floor(swiper.params.slidesPerView/2);								
+							if(index > 0 && index>=SwiperMiddle && SwiperMiddle >= 1) index = index-SwiperMiddle;
+							swiper.slideTo(index);
+						}
 					}
-				}
+				});
 			});
-		});
-	</script>
+		</script>
 
-	<p><br><br></p>
+		<p><br><br></p>
 
-	<!-- Slider main container -->
-	<div class="swiper-container swiper2">
-	    <!-- Additional required wrapper -->
-	    <div class="swiper-wrapper">
-	        <!-- Slides -->
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
-	        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
-	    </div>
-	    <!-- If we need pagination -->
-	    <div class="swiper-pagination"></div>
-	    
-	    <!-- If we need navigation buttons -->
-	    <div class="swiper-button-prev"></div>
-	    <div class="swiper-button-next"></div>
-	    
-	    <!-- If we need scrollbar -->
-	    <div class="swiper-scrollbar"></div>
-	</div><!-- .swiper-container -->
-	<script>
-		$(function() {
-		    var swiper2 = new Swiper ('.swiper2.swiper-container', {
-				// Optional parameters			
-				autoplay: false,
-				freeMode: false,
-				slidesPerView: 3, 
-				spaceBetween: 15,	
-		
-				// If we need pagination
-				pagination: '.swiper2 .swiper-pagination',
-		
-				// Navigation arrows
-				nextButton: '.swiper2 .swiper-button-next',
-				prevButton: '.swiper2 .swiper-button-prev',
-		
-				// And if we need scrollbar
-				scrollbar: '.swiper2 .swiper-scrollbar',
-		    });
+		<!-- Slider main container -->
+		<div class="swiper-container swiper2">
+		    <!-- Additional required wrapper -->
+		    <div class="swiper-wrapper">
+		        <!-- Slides -->
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
+		        <div class="swiper-slide"><a data-size="462x198" class="photoswipe2" href="http://placehold.it/462x198/FF7DEF/fff/"><img src="http://placehold.it/350x150/FF7DEF/fff/"></a></div>
+		    </div>
+		    <!-- If we need pagination -->
+		    <div class="swiper-pagination"></div>
+		    
+		    <!-- If we need navigation buttons -->
+		    <div class="swiper-button-prev"></div>
+		    <div class="swiper-button-next"></div>
+		    
+		    <!-- If we need scrollbar -->
+		    <div class="swiper-scrollbar"></div>
+		</div><!-- .swiper-container -->
+		<script>
+			$(function() {
+			    var swiper2 = new Swiper ('.swiper2.swiper-container', {
+					// Optional parameters			
+					autoplay: false,
+					freeMode: false,
+					slidesPerView: 3, 
+					spaceBetween: 15,	
+			
+					// If we need pagination
+					pagination: '.swiper2 .swiper-pagination',
+			
+					// Navigation arrows
+					nextButton: '.swiper2 .swiper-button-next',
+					prevButton: '.swiper2 .swiper-button-prev',
+			
+					// And if we need scrollbar
+					scrollbar: '.swiper2 .swiper-scrollbar',
+			    });
 
-		    $("a.photoswipe2").initPhotoSwipe({
-				'events': {
-					'afterChange': function(){
-						var index = this.getCurrentIndex();
-						//листаем примерно до середины
-						var SwiperMiddle = +Math.floor(swiper2.params.slidesPerView/2);								
-						if(index > 0 && index>=SwiperMiddle && SwiperMiddle >= 1) index = index-SwiperMiddle;
-						swiper2.slideTo(index);
+			    $("a.photoswipe2").initPhotoSwipe({
+					'events': {
+						'afterChange': function(){
+							var index = this.getCurrentIndex();
+							//листаем примерно до середины
+							var SwiperMiddle = +Math.floor(swiper2.params.slidesPerView/2);								
+							if(index > 0 && index>=SwiperMiddle && SwiperMiddle >= 1) index = index-SwiperMiddle;
+							swiper2.slideTo(index);
+						}
 					}
-				}
+				});
 			});
-		});
-	</script>
-	
+		</script>
+	</div><!-- .container -->
 </body>
 </html>
