@@ -8,7 +8,7 @@
 *		"loop"	: true,
 *		"events": {
 *			'afterChange': function(){
-*				
+*
 *			}
 *		}
 *	});
@@ -25,13 +25,13 @@
 	        temp[key] = objClone(obj[key]);
 	    return temp;
 	}
-	
+
 	$.fn.initPhotoSwipe = function( options ) {
 		var $elements 	= $(this),
 			items 	= [];
 		if(!$elements.length) return;
 
-		//перед </body> должен располагаться html код окна .pswp 
+		//перед </body> должен располагаться html код окна .pswp
 		if(!$('.pswp').length) {
 			;(function(){
 				var pswp = '<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">'+
@@ -72,14 +72,14 @@
 			})();
 		}
 		var pswpElement = $('.pswp').get(0);
-		
+
 		// !! Свои параметры по умолчанию
 		var	settings = $.extend( {
 			'loop': false,
 			'shareEl': false,
 		}, options);
 
-		countPhotoSwipe++;	
+		countPhotoSwipe++;
 
 		var openPhotoSwipe = function ( index, disableAnimation, uid ){
 			var localSettings = objClone(settings);
@@ -97,13 +97,17 @@
                 return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
             }
 
-			
+
 			var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, localSettings);
-			if(!!localSettings.events && $.isPlainObject(localSettings.events)) {
-				for (var eventName in localSettings.events) {
-					gallery.listen(eventName, localSettings.events[eventName]);
+			if(!!localSettings.events) {
+				if ($.isPlainObject(localSettings.events)) {
+					for (var eventName in localSettings.events) {
+						gallery.listen(eventName, localSettings.events[eventName]);
+					}
+				} else {
+					console.error("Ошибка в settings.events");
 				}
-			} else {console.error("Ошибка в settings.events");}
+			}
 			gallery.init();
 		};
 
@@ -126,19 +130,19 @@
 			if($link.find("img").length > 0) {
                 // <img> thumbnail element, retrieving thumbnail url
                 item.msrc = $link.find("img").attr("src");
-            } 
+            }
 
 			//для каждой ссылки добавим свой data-pswp-uid
 			$link.data("pswp-uid", index);
 
 			items.push(item);
 
-			$link.on('click', function(event) {	
-				event.preventDefault();	
-				openPhotoSwipe(index, false, localCount);				
+			$link.on('click', function(event) {
+				event.preventDefault();
+				openPhotoSwipe(index, false, localCount);
 			});
 		});
-			
+
 
 		// parse picture index and gallery index from URL (#&pid=1&gid=2)
 	    var photoswipeParseHash = function() {
@@ -154,10 +158,10 @@
 	            if(!vars[i]) {
 	                continue;
 	            }
-	            var pair = vars[i].split('=');  
+	            var pair = vars[i].split('=');
 	            if(pair.length < 2) {
 	                continue;
-	            }           
+	            }
 	            params[pair[0]] = pair[1];
 	        }
 
@@ -174,7 +178,7 @@
 	    		openPhotoSwipe(+hashData.pid-1, true, countPhotoSwipe);
 	    	}
 	    }
-		
+
 	};
 
 })( $ );

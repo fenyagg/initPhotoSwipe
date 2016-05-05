@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>InitPhotoSwipe</title>
-	
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
 	<!-- Swiper -->
@@ -17,8 +17,8 @@
 
 	<!-- initPhotoSwipe -->
 	<script type="text/javascript" src="js/initPhotoSwipe.js"></script>
-	
-	<style>		
+
+	<style>
 		html {
 		    height: 100%;
 		}
@@ -46,7 +46,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>InitPhotoSwipe</h1>		
+		<h1>InitPhotoSwipe</h1>
 		<!-- Slider main container -->
 		<div class="swiper-container swiper">
 		    <!-- Additional required wrapper -->
@@ -60,30 +60,30 @@
 		    </div>
 		    <!-- If we need pagination -->
 		    <div class="swiper-pagination"></div>
-		    
+
 		    <!-- If we need navigation buttons -->
 		    <div class="swiper-button-prev"></div>
 		    <div class="swiper-button-next"></div>
-		    
+
 		    <!-- If we need scrollbar -->
 		    <div class="swiper-scrollbar"></div>
 		</div><!-- .swiper-container -->
 		<script>
-			$(function() {		
+			$(function() {
 			    var swiper = new Swiper ('.swiper.swiper-container', {
-					// Optional parameters			
+					// Optional parameters
 					autoplay: false,
 					freeMode: false,
-					slidesPerView: 3, 
-					spaceBetween: 15,	
-			
+					slidesPerView: 3,
+					spaceBetween: 15,
+
 					// If we need pagination
 					pagination: '.swiper-pagination',
-			
+
 					// Navigation arrows
 					nextButton: '.swiper .swiper-button-next',
 					prevButton: '.swiper .swiper-button-prev',
-			
+
 					// And if we need scrollbar
 					scrollbar: '.swiper .swiper-scrollbar',
 			    });
@@ -93,7 +93,7 @@
 						'afterChange': function(){
 							var index = this.getCurrentIndex();
 							//листаем примерно до середины
-							var SwiperMiddle = +Math.floor(swiper.params.slidesPerView/2);								
+							var SwiperMiddle = +Math.floor(swiper.params.slidesPerView/2);
 							if(index > 0 && index>=SwiperMiddle && SwiperMiddle >= 1) index = index-SwiperMiddle;
 							swiper.slideTo(index);
 						}
@@ -117,30 +117,30 @@
 		    </div>
 		    <!-- If we need pagination -->
 		    <div class="swiper-pagination"></div>
-		    
+
 		    <!-- If we need navigation buttons -->
 		    <div class="swiper-button-prev"></div>
 		    <div class="swiper-button-next"></div>
-		    
+
 		    <!-- If we need scrollbar -->
 		    <div class="swiper-scrollbar"></div>
 		</div><!-- .swiper-container -->
 		<script>
 			$(function() {
 			    var swiper2 = new Swiper ('.swiper2.swiper-container', {
-					// Optional parameters			
+					// Optional parameters
 					autoplay: false,
 					freeMode: false,
-					slidesPerView: 3, 
-					spaceBetween: 15,	
-			
+					slidesPerView: 3,
+					spaceBetween: 15,
+
 					// If we need pagination
 					pagination: '.swiper2 .swiper-pagination',
-			
+
 					// Navigation arrows
 					nextButton: '.swiper2 .swiper-button-next',
 					prevButton: '.swiper2 .swiper-button-prev',
-			
+
 					// And if we need scrollbar
 					scrollbar: '.swiper2 .swiper-scrollbar',
 			    });
@@ -150,7 +150,7 @@
 						'afterChange': function(){
 							var index = this.getCurrentIndex();
 							//листаем примерно до середины
-							var SwiperMiddle = +Math.floor(swiper2.params.slidesPerView/2);								
+							var SwiperMiddle = +Math.floor(swiper2.params.slidesPerView/2);
 							if(index > 0 && index>=SwiperMiddle && SwiperMiddle >= 1) index = index-SwiperMiddle;
 							swiper2.slideTo(index);
 						}
