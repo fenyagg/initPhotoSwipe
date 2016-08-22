@@ -27,8 +27,7 @@
 	}
 
 	$.fn.initPhotoSwipe = function( options ) {
-		var $elements 	= $(this),
-			items 	= [];
+		var $elements 	= $(this);
 		if(!$elements.length) return;
 
 		//перед </body> должен располагаться html код окна .pswp
@@ -77,6 +76,8 @@
 		var	settings = $.extend( {
 			'loop': false,
 			'shareEl': false,
+			'thumbs': true,
+			'items': []
 		}, options);
 
 		countPhotoSwipe++;
@@ -88,17 +89,19 @@
 
 			if(!!disableAnimation) {localSettings.showAnimationDuration = 0;}
 			localSettings.index = index;
-			localSettings.getThumbBoundsFn = function( index ) {
-				// See Options -> getThumbBoundsFn section of documentation for more info
-               var thumbnail = $elements.eq(index).find("img").get(0), // find thumbnail
-                   pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-                   rect = thumbnail.getBoundingClientRect();
+			if(localSettings.thumbs) {
+				localSettings.getThumbBoundsFn = function( index ) {
+					// See Options -> getThumbBoundsFn section of documentation for more info
+	               var thumbnail = $elements.eq(index).find("img").get(0), // find thumbnail
+	                   pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+	                   rect = thumbnail.getBoundingClientRect();
 
-                return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
-            }
+	                return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+	            }
+			}
 
 
-			var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, localSettings);
+			var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, settings.items, localSettings);
 			if(!!localSettings.events) {
 				if ($.isPlainObject(localSettings.events)) {
 					for (var eventName in localSettings.events) {
@@ -111,33 +114,39 @@
 			gallery.init();
 		};
 
+		if( !settings.items.length ) {
+			$elements.each(function(index, el) {
+				var $link 	= $(this),
+					dataSizes = $link.data("size"),
+					localSettings = objClone(settings);
+
+				if(!dataSizes) {console.error("initPhotoSwipe: Нет атрибута 'data-size'='WIDTHxHEIGHT' у ссылки"); return;}
+				if(!$link.attr("href").length) {console.error("initPhotoSwipe: Нет атрибута 'href' у ссылки:"); return;}
+
+				var arSizes = dataSizes.split("x");
+				var item = {
+					src: $link.attr("href"),
+					w: arSizes[0],
+					h: arSizes[1],
+					title: $link.attr("title")
+				}
+
+				if( localSettings.thumbs && $link.find("img").length > 0 ) {
+		            // <img> thumbnail element, retrieving thumbnail url
+		            item.msrc = $link.find("img").attr("src");
+		        }
+
+				//для каждой ссылки добавим свой data-pswp-uid
+				$link.data("pswp-uid", index);
+
+				settings.items.push(item);
+			});
+		}
+
 		$elements.each(function(index, el) {
-			var $link 	= $(this),
-				dataSizes = $link.data("size"),
-				localCount = countPhotoSwipe;
+			var localCount = countPhotoSwipe;
 
-			if(!dataSizes) {console.error("initPhotoSwipe: Нет атрибута 'data-size' у ссылки"); return;}
-			if(!$link.attr("href").length) {console.error("initPhotoSwipe: Нет атрибута 'href' у ссылки:"); return;}
-
-			var arSizes = dataSizes.split("x");
-			var item = {
-				src: $link.attr("href"),
-				w: arSizes[0],
-				h: arSizes[1],
-				title: $link.attr("title")
-			}
-
-			if($link.find("img").length > 0) {
-                // <img> thumbnail element, retrieving thumbnail url
-                item.msrc = $link.find("img").attr("src");
-            }
-
-			//для каждой ссылки добавим свой data-pswp-uid
-			$link.data("pswp-uid", index);
-
-			items.push(item);
-
-			$link.on('click', function(event) {
+			$(this).on('click', function(event) {
 				event.preventDefault();
 				openPhotoSwipe(index, false, localCount);
 			});
